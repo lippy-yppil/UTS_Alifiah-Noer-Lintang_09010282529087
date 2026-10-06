@@ -1,0 +1,325 @@
+:root {
+    color-scheme: dark;
+    --bg: #181c12;
+    --surface: #20261a;
+    --surface-deep: #14170e;
+    --line: #323b27;
+    --line-strong: #47533a;
+    --paper: #eadfc8;
+    --paper-dim: #b4aa90;
+    --brass: #c1a26b;
+    --brass-hover: #d6bd88;
+    --moss: #a9b87a;
+    --rose: #e0998a;
+    --wood: #4a2f20;
+    --band: rgba(193, 162, 107, .55);
+}
+
+/* Warna punggung buku per kategori */
+.spine-0 { --spine: #55623a; }
+.spine-1 { --spine: #6b4430; }
+.spine-2 { --spine: #5b2c2c; }
+.spine-3 { --spine: #2f4a45; }
+.spine-4 { --spine: #6f5629; }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    background-image: radial-gradient(900px 420px at 85% -80px, rgba(193, 162, 107, .09), transparent 70%);
+    color: var(--paper);
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+}
+
+::selection { background: var(--brass); color: #1c2015; }
+
+a { color: var(--brass); text-underline-offset: 3px; }
+a:hover { color: var(--brass-hover); }
+
+h1, h2, h3 {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-weight: 400;
+    line-height: 1.15;
+    margin: 0;
+}
+h1 { font-size: clamp(2rem, 4.5vw, 2.8rem); }
+h2 { font-size: 1.6rem; }
+
+.lead {
+    margin: .4rem 0 0;
+    color: var(--paper-dim);
+    font-family: 'IM Fell English', Georgia, serif;
+    font-style: italic;
+    font-size: 1.1rem;
+}
+
+/* ---------- Header & navigasi ---------- */
+.site-header { background: var(--surface-deep); border-bottom: 1px solid var(--line); }
+.site-header .inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: .9rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.brand {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 1.6rem;
+    color: var(--paper);
+    text-decoration: none;
+}
+.brand:hover { color: var(--paper); }
+.brand::before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 26px;
+    margin-right: .6rem;
+    vertical-align: -5px;
+    background: var(--brass);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
+}
+
+.nav { display: flex; gap: 1.5rem; margin-right: auto; }
+.nav-link {
+    color: var(--paper-dim);
+    text-decoration: none;
+    padding: .2rem 0;
+    border-bottom: 2px solid transparent;
+}
+.nav-link:hover { color: var(--paper); }
+.nav-link.is-active { color: var(--paper); border-bottom-color: var(--brass); }
+
+.account { display: flex; align-items: center; gap: .9rem; color: var(--paper-dim); }
+
+/* ---------- Halaman ---------- */
+.page { flex: 1; width: 100%; max-width: 1080px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+
+.page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.flash {
+    margin-bottom: 1.5rem;
+    padding: .75rem 1rem;
+    border-left: 3px solid var(--moss);
+    background: rgba(169, 184, 122, .1);
+}
+
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 1.25rem;
+    text-align: center;
+    color: var(--paper-dim);
+    font-size: .9rem;
+}
+
+/* ---------- Tombol ---------- */
+.btn {
+    display: inline-block;
+    padding: .55rem 1.1rem;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    font: inherit;
+    font-weight: 600;
+    font-size: .95rem;
+    line-height: 1.3;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color .15s, border-color .15s, color .15s;
+}
+.btn:focus-visible,
+.input:focus-visible,
+.select:focus-visible,
+.nav-link:focus-visible,
+.spine:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+
+.btn-primary { background: var(--brass); color: #1c2015; }
+.btn-primary:hover { background: var(--brass-hover); color: #1c2015; }
+.btn-ghost { background: transparent; border-color: var(--line-strong); color: var(--paper); }
+.btn-ghost:hover { border-color: var(--brass); color: var(--brass); }
+.btn-danger { background: transparent; border-color: #6e3a35; color: var(--rose); }
+.btn-danger:hover { background: #6e3a35; color: var(--paper); }
+.btn-sm { padding: .3rem .7rem; font-size: .85rem; }
+
+/* ---------- Form ---------- */
+.panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1.75rem;
+}
+
+.stack { display: grid; gap: 1.1rem; }
+
+.form-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.1rem; }
+.col-2 { grid-column: span 2; }
+.col-3 { grid-column: span 3; }
+.col-6 { grid-column: span 6; }
+
+.label { display: block; margin-bottom: .35rem; font-size: .92rem; color: var(--paper-dim); }
+
+.input, .select {
+    width: 100%;
+    padding: .6rem .75rem;
+    background: var(--bg);
+    color: var(--paper);
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+    font: inherit;
+}
+.input::placeholder { color: #7f8268; }
+.input:focus, .select:focus { border-color: var(--brass); }
+.input.is-invalid, .select.is-invalid { border-color: #a4554d; }
+.select option { background: var(--surface); }
+
+.error { margin: .3rem 0 0; font-size: .88rem; color: var(--rose); }
+
+.check { display: flex; align-items: center; gap: .5rem; color: var(--paper-dim); font-size: .92rem; }
+.check input { accent-color: var(--brass); }
+
+.form-actions { display: flex; gap: .6rem; margin-top: 1.5rem; }
+
+/* ---------- Login ---------- */
+.auth-wrap { min-height: 70vh; display: grid; place-items: center; }
+.auth-panel { width: 100%; max-width: 420px; border-top: 4px double var(--brass); }
+.brand-static { display: block; margin-bottom: 1.25rem; color: var(--brass); }
+.auth-panel .lead { margin-bottom: 1.5rem; }
+.hint { margin: 1.25rem 0 0; font-size: .88rem; color: var(--paper-dim); font-style: italic; }
+
+/* ---------- Dashboard ---------- */
+.summary { max-width: 34em; margin: 0 0 3rem; font-size: 1.35rem; }
+.summary strong {
+    padding: 0 .1em;
+    font-family: 'IM Fell English', Georgia, serif;
+    font-weight: 400;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--brass);
+}
+
+.shelf-section h2 { margin-bottom: 1.25rem; }
+
+.shelf {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    min-height: 120px;
+    padding: 0 1.5rem;
+    border-bottom: 14px solid var(--wood);
+    border-radius: 0 0 2px 2px;
+    box-shadow: 0 8px 0 -2px rgba(0, 0, 0, .25);
+    overflow-x: auto;
+}
+
+.spine {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    padding: 26px 0;
+    color: var(--paper);
+    text-decoration: none;
+    border-radius: 2px 2px 0 0;
+    background-color: var(--spine);
+    background-image: linear-gradient(to bottom,
+        transparent 0 12px, var(--band) 12px 14px, transparent 14px calc(100% - 14px),
+        var(--band) calc(100% - 14px) calc(100% - 12px), transparent calc(100% - 12px));
+    box-shadow: inset 3px 0 0 rgba(255, 255, 255, .08), inset -3px 0 0 rgba(0, 0, 0, .2);
+    transition: transform .15s ease;
+}
+.spine span {
+    max-height: 100%;
+    writing-mode: vertical-rl;
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.spine:hover { color: #fff; transform: translateY(-8px); }
+
+.empty { color: var(--paper-dim); font-style: italic; padding: 1.5rem 0; }
+
+/* ---------- Daftar buku ---------- */
+.filter { display: grid; grid-template-columns: 1fr 220px auto auto; gap: .6rem; margin-bottom: 1.5rem; }
+
+.table-wrap { overflow-x: auto; }
+.ledger { width: 100%; min-width: 900px; border-collapse: collapse; }
+.ledger th {
+    padding: .6rem .75rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: .88rem;
+    color: var(--paper-dim);
+    border-bottom: 1px solid var(--line-strong);
+}
+.ledger td { padding: .85rem .75rem; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.ledger tbody tr:hover { background: rgba(193, 162, 107, .05); }
+.ledger .book-title { font-family: 'IM Fell English', Georgia, serif; font-size: 1.2rem; }
+.ledger .num { text-align: right; font-variant-numeric: tabular-nums; }
+.ledger td.empty { text-align: center; }
+
+.tag { display: inline-flex; align-items: center; gap: .5rem; }
+.tag::before {
+    content: "";
+    width: .7rem;
+    height: 1.1rem;
+    background: var(--spine);
+    border-radius: 1px;
+}
+
+.actions { display: flex; gap: .4rem; justify-content: flex-end; }
+.inline { display: inline; margin: 0; }
+
+.pager { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1.5rem; }
+.pager-item {
+    padding: .35rem .75rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+    color: var(--paper);
+    font-size: .92rem;
+    text-decoration: none;
+}
+a.pager-item:hover { border-color: var(--brass); color: var(--brass); }
+.pager-item.is-current { background: var(--brass); border-color: var(--brass); color: #1c2015; }
+.pager-item.is-disabled { color: #6f7358; border-color: var(--line); }
+
+/* ---------- Detail buku ---------- */
+.detail { max-width: 640px; }
+.detail .back { margin: 0 0 1.5rem; font-size: .95rem; }
+.byline { margin: .5rem 0 2rem; font-family: 'IM Fell English', Georgia, serif; font-style: italic; font-size: 1.3rem; color: var(--paper-dim); }
+
+.facts { margin: 0; }
+.facts > div { display: flex; align-items: baseline; gap: .75rem; padding: .8rem 0; }
+.facts dt { display: flex; flex: 1; align-items: baseline; gap: .75rem; color: var(--paper-dim); }
+.facts dt::after { content: ""; flex: 1; border-bottom: 1px dotted var(--line-strong); }
+.facts dd { margin: 0; text-align: right; }
+
+/* ---------- Responsif ---------- */
+@media (max-width: 700px) {
+    .form-grid > * { grid-column: 1 / -1; }
+    .filter { grid-template-columns: 1fr; }
+    .site-header .inner { gap: 1rem; }
+    .summary strong { font-size: 2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+}

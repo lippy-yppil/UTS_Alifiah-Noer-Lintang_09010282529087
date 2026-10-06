@@ -2,40 +2,41 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<h3 class="mb-4">Dashboard</h3>
+<header class="page-head">
+    <div>
+        <h1>Selamat datang, {{ auth()->user()->name }}</h1>
+        <p class="lead">Ringkasan koleksi perpustakaan hari ini.</p>
+    </div>
+    <a href="{{ route('books.create') }}" class="btn btn-primary">Tambah buku</a>
+</header>
 
-<div class="row g-3 mb-4">
-    <div class="col-md-4">
-        <div class="card text-bg-primary"><div class="card-body">
-            <div>Total Judul Buku</div><h2>{{ $totalBooks }}</h2>
-        </div></div>
-    </div>
-    <div class="col-md-4">
-        <div class="card text-bg-success"><div class="card-body">
-            <div>Total Kategori</div><h2>{{ $totalCategories }}</h2>
-        </div></div>
-    </div>
-    <div class="col-md-4">
-        <div class="card text-bg-warning"><div class="card-body">
-            <div>Total Stok</div><h2>{{ $totalStock }}</h2>
-        </div></div>
-    </div>
-</div>
+<p class="summary">
+    Koleksi terdiri dari <strong>{{ $totalBooks }}</strong> judul dalam
+    <strong>{{ $totalCategories }}</strong> kategori, dengan
+    <strong>{{ $totalStock }}</strong> eksemplar di rak.
+</p>
 
-<div class="card">
-    <div class="card-header">5 Buku Terbaru</div>
-    <table class="table mb-0">
-        <thead><tr><th>Judul</th><th>Penulis</th><th>Kategori</th><th>Stok</th></tr></thead>
-        <tbody>
-        @foreach ($latestBooks as $book)
-            <tr>
-                <td>{{ $book->title }}</td>
-                <td>{{ $book->author }}</td>
-                <td>{{ $book->category->name }}</td>
-                <td>{{ $book->stock }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-</div>
+<section class="shelf-section" aria-labelledby="shelf-title">
+    <h2 id="shelf-title">Baru di rak</h2>
+
+    @if ($latestBooks->isEmpty())
+        <p class="empty">
+            Belum ada buku. <a href="{{ route('books.create') }}">Tambahkan buku pertama</a>.
+        </p>
+    @else
+        <div class="shelf">
+            @foreach ($latestBooks as $book)
+                <a href="{{ route('books.show', $book) }}"
+                @class(['spine', 'spine-' . ($book->category_id % 5)])
+                @style([
+                    'height: ' . (150 + ($book->id * 23) % 60) . 'px',
+                    'width: ' . (48 + ($book->id * 11) % 18) . 'px',
+                ])
+                title="{{ $book->title }}, {{ $book->author }}">
+                    <span>{{ $book->title }}</span>
+                </a>
+            @endforeach
+        </div>
+    @endif
+</section>
 @endsection

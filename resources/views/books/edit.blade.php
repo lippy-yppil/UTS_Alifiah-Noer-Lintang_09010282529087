@@ -1,12 +1,18 @@
 @extends('layouts.app')
-@section('title', 'Edit Buku')
+@section('title', 'Edit buku')
 
 @section('content')
-<h3 class="mb-3">Edit Buku</h3>
-<div class="card"><div class="card-body">
+<header class="page-head">
+    <div>
+        <h1>Edit buku</h1>
+        <p class="lead">{{ $book->title }}</p>
+    </div>
+</header>
+
+<div class="panel">
     <form method="POST" action="{{ route('books.update', $book) }}">
         @method('PUT')
-        @include('books._form')
+        @include('books._form', ['submit' => 'Simpan perubahan'])
     </form>
-</div></div>
+</div>
 @endsection

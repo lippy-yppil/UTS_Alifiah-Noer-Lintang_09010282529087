@@ -1,11 +1,17 @@
 @extends('layouts.app')
-@section('title', 'Tambah Buku')
+@section('title', 'Tambah buku')
 
 @section('content')
-<h3 class="mb-3">Tambah Buku</h3>
-<div class="card"><div class="card-body">
+<header class="page-head">
+    <div>
+        <h1>Tambah buku</h1>
+        <p class="lead">Catat buku baru ke dalam katalog.</p>
+    </div>
+</header>
+
+<div class="panel">
     <form method="POST" action="{{ route('books.store') }}">
-        @include('books._form')
+        @include('books._form', ['submit' => 'Simpan buku'])
     </form>
-</div></div>
+</div>
 @endsection
